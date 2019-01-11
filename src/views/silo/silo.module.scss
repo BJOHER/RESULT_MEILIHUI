@@ -1,0 +1,145 @@
+.big{
+    height: 450px;
+    width: 100%;
+    background: #d8d8d8;
+    .bannerItem{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        img{
+            width: 100%;
+            display: block;
+        }
+        .bannerSlogan{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            left: 0;
+            color: #fff;
+            bottom:61px;
+            .bannerLabel{
+                width: 100%;
+                height: 29px;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            strong{
+                margin-bottom: 3px;
+                line-height: 31px;
+                font-size: 26px;
+                font-weight: 700;
+            }
+            span{
+                line-height: 20px;
+                font-size: 14px;
+            }
+            p{
+                line-height: 20px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+.eventContainer{
+    padding-top: 5px;
+    .item{
+        .eventItem{
+            width: 345px;
+            height: 207px;
+            overflow: hidden;
+            margin: 0 auto 10px;
+            position: relative;
+            .BJH{
+                width: 100%;
+                height: 100%;
+                img{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+                .eventInfo{
+                    width: 345px;
+                    height: 103px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-content: flex-end;
+                    align-items: flex-end;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.55));
+                    .eventIcon{
+                        width:100%;
+                        height: 14px;
+                        overflow: hidden;
+                        margin-bottom: 5px;
+                        padding-left: 10px;
+                        text-align: left;
+                    }
+                    .eventBase{
+                        padding-bottom: 5px;
+                        width: 100%;
+                        height: auto;
+                        padding-left: 10px;
+                        text-align: left;
+                        .eventBrand{
+                            display: block;
+                            margin-bottom: 5px;
+                            text-transform: uppercase;
+                            line-height: 16px;
+                            font-size: 16px;
+                            color:#fff;
+                        }
+                        .eventName{
+                            display: block;
+                            margin-bottom: 5px;
+                            height: 14px;
+                            line-height: 14px;
+                            font-size: 14px;
+                            color:#fff;
+                        }
+                        .eventdiscount{
+                            display: block;
+                            margin-bottom: 5px;
+                            height: 14px;
+                            line-height: 14px;
+                            font-size: 14px;
+                            color:#fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }

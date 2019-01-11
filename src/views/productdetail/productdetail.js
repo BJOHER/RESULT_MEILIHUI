@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 class Productdetail extends Component{
     render(){
-        return (
+        return(
             <div>
                 Productdetail
             </div>
         )
     }
 }
-export default Productdetail
+export default Productdetail;
