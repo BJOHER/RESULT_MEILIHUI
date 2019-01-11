@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 import headcss from './head.module.scss';
 import {gethead,getnav,brand} from '../../model/model';
+import Search from '../search/search'
 // import store from '../../store';
 // import {connect} from 'react-redux';
 
@@ -12,6 +13,7 @@ class Head extends Component{
             words:null,
             navlist:[],
             show:false,
+            create:false,
 
         }
         
@@ -82,8 +84,8 @@ class Head extends Component{
                         <li className={headcss.login}>
                             <span className={headcss.loginBtn}><NavLink to="/login" >登陆</NavLink></span>
                         </li>
-                        <li className={headcss.search}>
-                            <a href="/index">
+                        <li className={headcss.search} onClick={this.handleClick3.bind(this)}>
+                            <a href="javascript:;">
                                 <strong>{this.state.words}</strong>
                             </a>
                         </li>
@@ -91,6 +93,13 @@ class Head extends Component{
                             <span><NavLink to="/shoppingcart">购物</NavLink></span>
                         </li>
                     </ul>
+                    {
+                        this.state.create?
+                        <Search name={this.state.words} event={this.handleEvent.bind(this)}/>
+                        :null
+                    }
+                    
+
                 </div>
                 <div className={headcss.menu}>
                     <div className={headcss.box}>
@@ -128,6 +137,18 @@ class Head extends Component{
         window.localStorage.setItem('categoryId',categoryId);
         window.localStorage.setItem('englishname',englishname);
         document.documentElement.scrollTop = 0;
+    }
+
+    handleClick3(){
+        this.setState({
+            create:true
+        })
+    }
+
+    handleEvent(){
+        this.setState({
+            create:false
+        })
     }
 }
 export default Head;
