@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 // import * as serviceWorker from './serviceWorker';
-
+import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
+import 'antd-mobile/dist/antd-mobile.css';  // or 'antd-mobile/dist/antd-mobile.less'
 // ReactDOM.render(<App />, document.getElementById('root'));
 import router from './router'
 ReactDOM.render(router,document.getElementById('root'))

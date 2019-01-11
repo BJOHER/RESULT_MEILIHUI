@@ -269,7 +269,7 @@ class Silo extends Component{
         )
     }
     handleClick(siloEn,eventId,urlkey){
-        this.props.history.push(`/productlist/siloEn=${siloEn}&eventCode=${eventId}&URLKey=${urlkey}`)
+        this.props.history.push(`/productlist?siloEn=${siloEn}&eventCode=${eventId}&URLKey=${urlkey}`)
     }
 }
 export default Silo;

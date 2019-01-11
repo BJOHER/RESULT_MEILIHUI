@@ -146,7 +146,7 @@ class Index extends Component{
     }
     
     handleClick(siloEn,eventCode,URLKey){
-        this.props.history.push(`productlist/siloEn=${siloEn}&eventCode=${eventCode}&URLKey=${URLKey}`)
+        this.props.history.push(`/productlist?siloEn=${siloEn}&eventCode=${eventCode}&URLKey=${URLKey}`)
     }
 }
 export default Index;

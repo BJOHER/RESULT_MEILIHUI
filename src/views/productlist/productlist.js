@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import store from '../../store'
-import ReactDOM from "react-dom";
+
+// import ReactDOM from "react-dom";
 import productslistcss from './productlist.module.scss'
-import { NavBar, Icon ,Grid} from 'antd-mobile';
-import { PullToRefresh,ListView } from 'antd-mobile';//同时引用样式
-import { BackTop,Popover, Button } from 'antd';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {Icon } from 'antd-mobile';
+import { PullToRefresh } from 'antd-mobile';//同时引用样式
+import { BackTop,Popover} from 'antd';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {connect} from 'react-redux'
 
 const content = (
@@ -127,7 +127,7 @@ class Productlist extends Component{
             	      >
             	      	{this.state.productslist.length>0?<ul className={productslistcss.list}>
             	           {this.state.productslist.map(item =><li key={item.productId+this.state.sort+this.state.key}  onClick={this.handleClicktodetail.bind(this,item)} className={productslistcss.list}>
-            	             <img src={item.imageUrl}/>
+            	             <img src={item.imageUrl} alt=""/>
                              <div className={productslistcss.tag}>{item.tagListDto?item.tagListDto.map(item=><span>{item.tag}</span>):null}</div>
             	             <div><strong>{item.brandName}</strong></div>
             	             <div>{item.productName}</div>
