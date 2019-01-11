@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {getColorSize} from '../../views/productdetail/model'
 import zjlscss from './index.module.scss'
 import {NavLink} from 'react-router-dom'
+import {Icon } from 'antd-mobile';
 
 class Header extends Component{
     constructor(props){
@@ -14,7 +15,7 @@ class Header extends Component{
     }
 
 
-    handleClick(){
+    handleClick2(){
         this.setState({
             show : !this.state.show
         })
@@ -39,14 +40,14 @@ class Header extends Component{
             {/* Header */}
             
                 <div className={zjlscss.left}>
-                    <span><NavLink to='/productlist'  className={zjlscss.textnone}>返回</NavLink></span>
+                    <span onClick={this.handleClick.bind(this)}><Icon type="left" /></span>
                 </div>
                 <div className={zjlscss.middle}>
                     <span>{this.state.brand}</span>
                     <span>￥{this.state.price}</span>                 
                 </div>
-                <div className={zjlscss.right} onClick={this.handleClick.bind(this)}>
-                    <span >更多</span>
+                <div className={zjlscss.right} onClick={this.handleClick2.bind(this)}>
+                    <span ><Icon type="ellipsis" /></span>
                     <div className={this.state.show?zjlscss.appear:zjlscss.disappear}>
                     <ul>
                         <li><NavLink to='/index' className={zjlscss.textnone}>首页</NavLink></li>
@@ -60,6 +61,12 @@ class Header extends Component{
            
         </div>
     }
+
+    handleClick(){
+        this.props.event()
+    }
+
+
 }
 
 export default Header

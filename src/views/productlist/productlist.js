@@ -357,11 +357,16 @@ class Productlist extends Component{
 
             // console.log(this.state.info.split('&')[1].split("=")[1])
             //ajax 数据请求完再给detail组件
-            this.props.getdetailinfo(item,this.state.info.split('&')[1].split("=")[1],this).then(res=>{
+            // this.props.getdetailinfo(item,this.state.info.split('&')[1].split("=")[1],this).then(res=>{
+            //     this.props.history.push(`/productdetail?eventCode=${this.state.info.split('&')[1].split("=")[1]}&glsCode=${item.glsCode}&URLKey=${this.state.info.split('&')[2].split("=")[1]}`);
+            // })
+            // //跳转
+    	    axios({
+                url:`http://www.mei.com/appapi/product/getAppProductDetailUrl/v3?eventCode=${this.state.info.split('&')[1].split("=")[1]}&glsCode=${item.glsCode}`
+            }).then(res=>{
+                window.localStorage.setItem('detail',JSON.stringify(res.data))
                 this.props.history.push(`/productdetail?eventCode=${this.state.info.split('&')[1].split("=")[1]}&glsCode=${item.glsCode}&URLKey=${this.state.info.split('&')[2].split("=")[1]}`);
             })
-            //跳转
-    	    
     	}
 
     handleclick(){
@@ -377,18 +382,4 @@ class Productlist extends Component{
     }
 }
 
-export default connect(
-        null,{
-            getdetailinfo(data1,data2,self){
-                return axios({
-                    url:`http://www.mei.com/appapi/product/getAppProductDetailUrl/v3?eventCode=${data2}&glsCode=${data1.glsCode}`
-                }).then(res=>{       //改为同步了                
-                        return {
-                            type:'detailInfo',
-                            payload:res.data
-                        }
-
-                    })
-            }
-        }
-    )(Productlist);
+export default Productlist;

@@ -11,9 +11,16 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+        .left{
+            span{
+                font-size: 14px;
+                padding:10px;
+            }
+        }
         .right{
             span{
                 font-size: 14px;
+                padding:10px;
             }
         }
        .middle{
