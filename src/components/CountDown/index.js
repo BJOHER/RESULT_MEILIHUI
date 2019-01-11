@@ -16,7 +16,7 @@ class CountDown extends Component{
     }
     //数据传过来的时间
     componentDidMount(){
-        getDetail().then(res=>{
+        getDetail(this.props.myname).then(res=>{
             console.log(res)
             this.setState({
                 endTime : res.ticketInfo[0].endDateLong,

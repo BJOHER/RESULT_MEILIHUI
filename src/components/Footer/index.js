@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import footerscss from  './index.module.scss'
 import {NavLink} from 'react-router-dom'
-import {getColorSize,getDetail,getProduct} from '../../views/productdetail/model'
+import {getColorSize,getDetail} from '../../views/productdetail/model'
 
 class Footer extends Component{
     constructor(props){
@@ -52,7 +52,7 @@ class Footer extends Component{
     }
 
     componentDidMount(){
-        getColorSize().then(res=>{
+        getColorSize(this.props.myname).then(res=>{
             console.log(res.colorGroup[0])
             this.setState({
                 info : res.colorGroup[0],
@@ -61,20 +61,20 @@ class Footer extends Component{
                infoimg :  res.colorGroup[0].productImgUrl
             })
         })
-        getDetail().then(res=>{
+        getDetail(this.props.myname).then(res=>{
             this.setState({
                 infosize : res.size
             })
         })
 
-        getProduct().then(res=>{
-            this.setState({
-                eventId :res.eventId,
-                productId : res.productId
-            })
-           console.log(this.state.eventId)
-           console.log(this.state.productId)
-        })
+        // getProduct().then(res=>{
+        //     this.setState({
+        //         eventId :res.eventId,
+        //         productId : res.productId
+        //     })
+        //    console.log(this.state.eventId)
+        //    console.log(this.state.productId)
+        // })
     }
 
     render(){

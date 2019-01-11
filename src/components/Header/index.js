@@ -21,7 +21,7 @@ class Header extends Component{
     }
 
     componentDidMount(){
-        getColorSize().then(res=>
+        getColorSize(this.props.myname).then(res=>
             // console.log(this.state.brand)
             // 
           {  console.log(res)

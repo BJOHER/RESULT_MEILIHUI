@@ -7,6 +7,8 @@ import Footer from '../../components/Footer'
 import Mounting from '../../components/Mounting'
 import detailscss from './productdetail.module.scss'
 import CountDown from '../../components/CountDown'
+import {connect} from 'react-redux'
+import store from '../../store'
 
 class Productdetail extends Component{
     constructor(props){
@@ -68,8 +70,8 @@ class Productdetail extends Component{
     }
 
     componentDidMount(){
-        
-        getDetail().then(res=>{
+        console.log(this.props.detail)
+        getDetail(this.props.detail).then(res=>{
             // console.log(res)
             // console.log(res.images)
             this.setState({
@@ -109,7 +111,7 @@ class Productdetail extends Component{
             console.log(this.state.productReview)
         })
 
-        getColorSize().then(res=>{
+        getColorSize(this.props.detail).then(res=>{
             console.log(res)  
             this.setState({
                 colorsize:res.colorGroup[0],
@@ -123,7 +125,7 @@ class Productdetail extends Component{
             // console.log(this.state.colorsize)
         })
 
-        getHot().then(res=>{
+        getHot(this.props.detail).then(res=>{
             console.log(res)
             this.setState({
                 hotlist:res
@@ -136,10 +138,10 @@ class Productdetail extends Component{
 
     render(){
         return(
-            <div >
+            <div className={detailscss.Productdetail}>
                 {/* Productdetail */}
-             <Header />
-            <Mounting />
+             <Header myname={this.props.detail}/>
+            <Mounting myname={this.props.detail} />
             
             {/* swiper */}
             <section>
@@ -174,7 +176,7 @@ class Productdetail extends Component{
                <div className={detailscss.otherinfoitem}>
                     <div className={detailscss.countdown}>
                         <span className={detailscss.stitle}>闪购</span>
-                        <div className={detailscss.stext}> <CountDown /></div>
+                        <div className={detailscss.stext}> <CountDown myname={this.props.detail}/></div>
                     </div>
                </div>
                {/* 领券 */}
@@ -450,7 +452,7 @@ class Productdetail extends Component{
                 <a  onClick={this.handleClick2.bind(this)}>确定</a>
             </div>
             
-            <Footer />
+            <Footer  myname={this.props.detail}/>
        </div>
         
         )
@@ -458,4 +460,11 @@ class Productdetail extends Component{
 
 
 }
-export default Productdetail;
+export default connect(
+    (state)=>{
+        return {
+            detail : state.productslistReducer
+        }
+    }
+
+)(Productdetail)

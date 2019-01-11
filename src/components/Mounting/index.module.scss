@@ -14,14 +14,15 @@
     color: #999;
     a{
         flex: 1;
+        color: #999;
     }
+    .changeColor{
+        color:#000;
+        font-weight: 600;
+   }
 }
 
 .disappear{
     display: none;
 }
 
-.changeColor{
-     color:black;
-     font-weight: 600;
-}
