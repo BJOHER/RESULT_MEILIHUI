@@ -1,0 +1,212 @@
+*{
+  padding: 0;
+  margin:0;
+  background: white;
+}
+ul{
+  list-style: none;
+}
+#productlist{
+  background: white;
+  width:100%;
+	.header{
+    background:white;
+		width:100%;
+    .hide{
+      width: 100%;
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      svg{
+        height: 16px;
+      }
+      span{
+        display: inline-block;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      span.first,span.last{
+        width: 20%;
+      }
+      span.second{
+        flex:1;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    .nav{
+      list-style: none;
+      height: 50px;
+      width: 100%;
+      display: flex;
+      li{
+        flex: 1;
+        text-align: center;
+        line-height: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        svg{
+          height: 16px;
+        }
+      }
+      .focus{
+        color:#f60;
+      }
+    }
+	}
+  .xiding{
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:2;
+  }
+  .free{
+    height:20px;
+    line-height: 20px;
+    margin:10px;
+    font-size: 16px;
+    span{
+      display: inline-block;
+    }
+    .first{
+      margin-right: 10px;
+      font-size: 12px;
+      height: 14px;
+      line-height: 14px;
+      border:1px solid red;
+      color:red;
+    }
+  }
+  .list{
+    list-style: none;
+    width: 100%;
+    li{
+      position: relative;
+      box-sizing: border-box;
+      display: inline-block;
+      width: 50%;
+      padding:10px;
+      img{
+        width: 100%;
+      }
+      div{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .tag{
+          width:100%;
+          height: 18px;
+        span{
+          margin-right:5px;
+          display: inline-block;
+          border:1px solid #ccc;
+          font-size: 12px;
+          height:18px;
+          line-height: 18px;
+        }
+      }
+      .price{
+        width: 100%;
+        span{
+          display: inline-block;
+          margin-right:10px;
+        }
+        .first{
+          color:red;
+          font-weight: 600;
+        }
+        .second{
+          text-decoration: line-through;
+          color:#ccc;
+          font-weight: 600
+        }
+        .last{
+          float:right;
+        }
+      }
+      .saleout{
+          display: inline-block;
+          position: absolute;
+          z-index:99;
+          top: 50%;
+          left:50%;
+          transform: translate(-50%,-50%);
+          width: 80%;
+          height: 40px;
+          background: rgba(0,0,0,.4);
+          line-height:40px;
+          color:gray;
+          text-align: center;
+          font-size:16px;
+      }
+      }
+    }
+  .show{
+    position: fixed;
+    z-index:10;
+    right: 0;
+    top:40px;
+    list-style: none;
+    background: #ccc;
+    width: 100px;
+    li{
+      height: 40px;
+      line-height: 40px;
+      color:#999;
+      border-bottom:1px solid #999;
+      text-align: center;
+    }
+  }
+  .filter{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 999;
+    padding:20px;
+    input{
+      height:30px;
+      width: 80%;
+      margin:5px;
+    }
+    .brandslist{
+        li{
+          display: inline-block;
+          border:1px solid #ccc;
+          margin:2px;
+          font-size:8px;
+          span{
+            color: red;
+          }
+        }
+        .focus{
+          border:1px solid #f60;
+        }
+    }
+    .fixed{
+      width:100%;
+      position: fixed;
+      bottom: 0;
+      left:0;
+      height:50px;
+      display: flex;
+      span{
+        border:2px solid #999;
+        display: inline-block;
+        flex:1;
+        text-align: center;
+        line-height: 50px;
+        font-size: 20px;
+        background: #ccc;
+        color:#222;
+        
+      }
+      }
+    }
+  
+}

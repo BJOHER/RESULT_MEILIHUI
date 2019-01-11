@@ -8,10 +8,10 @@ import Login from '../views/login/login';
 import Productlist from '../views/productlist/productlist';
 import Productdetail from '../views/productdetail/productdetail';
 import Shoppingcart from '../views/shoppingcart/shoppingcart';
-// import {Provider} from 'react-redux';
-// import store from '../store';
+import {Provider} from 'react-redux';
+import store from '../store';
 const router = (
-    // <Provider store={store}>
+    <Provider store={store}>
     <Router>
         <App>
             <Switch>
@@ -26,7 +26,7 @@ const router = (
             </Switch> 
         </App> 
     </Router>
-    // </Provider>
+    </Provider>
 )
 
 export default router;
