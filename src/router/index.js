@@ -5,6 +5,7 @@ import Home from '../views/index';
 import Silo from '../views/silo/silo';
 import Upcoming from '../views/upcoming/upcoming';
 import Login from '../views/login/login';
+import Register from '../views/register/register';
 import Productlist from '../views/productlist/productlist';
 import Productdetail from '../views/productdetail/productdetail';
 import Shoppingcart from '../views/shoppingcart/shoppingcart';
@@ -20,6 +21,7 @@ const router = (
                 <Route path="/silo/:englishname" component={Silo}/>
                 <Route path="/upcoming" component={Upcoming}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
                 <Route path="/productlist" component={Productlist}/>
                 <Route path="/productdetail" component={Productdetail}/>
                 <Route path="/shoppingcart/edit" component={Edit} />

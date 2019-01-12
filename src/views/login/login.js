@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+<<<<<<< HEAD
 import Kcss from "./login.module.scss"
 import store from "../../store"
 import axios from "axios"
+=======
+import axios from 'axios'
+>>>>>>> 5487297f83170665089194e34029be6d0c02f71d
 class Login extends Component{
 
 	constructor(props){
@@ -12,6 +16,7 @@ class Login extends Component{
 		}
 	}
     render(){
+<<<<<<< HEAD
         return <div className={Kcss.all}>
   		<a className={Kcss.a} href="/index"><span className={Kcss.span}>✕</span></a>
 		<h3 className={Kcss.h3}>登录/注册</h3>
@@ -41,6 +46,33 @@ class Login extends Component{
 			<li className={Kcss.liii}>微博</li>
 		</ul>	
 		</div>
+=======
+        return(<div>
+                邮箱：<input typy="text" ref="email" />
+                密码：<input typy="text" ref="password" />
+                <button onClick={this.handlelogin.bind(this)}>登录</button>
+            </div>
+        )
+>>>>>>> 5487297f83170665089194e34029be6d0c02f71d
+    }
+    handlelogin(){
+    	axios({
+    		method:'post',
+    		url:'/login',
+    		data:{
+    			email:this.refs.email.value,
+    			password:this.refs.password.value
+    		}
+    	}).then(res=>{
+    		console.log(res)
+    		if(res.data.ok===0){   			
+    			this.props.history.push('/register')
+    		}else{
+    			this.props.history.push('/index')
+    			document.cookie({email:this.refs.email.value,
+    			password:this.refs.password.value})
+    		}
+    	})
     }
 }
 export default Login;

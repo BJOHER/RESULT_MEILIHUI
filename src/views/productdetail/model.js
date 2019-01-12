@@ -9,6 +9,17 @@ function getDetail(data){
     })
 }
 
+function getDetail2(method,url){
+    return (
+        axios({
+            method:method,
+            url:url,
+        }).then(res=>{
+            return res.data.infos
+        })
+    )
+}
+
 function getColorSize(data){
     return axios({
         url : `http://www.mei.com/appapi/product/colorgroupsize/v3?categoryId=${data.eventId}&productId=${data.productId}&platform_code=H5&timestamp=1546936903691&summary=37dd1d07836517317d4b2f398174cacf`
@@ -18,15 +29,39 @@ function getColorSize(data){
     })
 }
 
+function getColorSize2(method,url){
+    return (
+        axios({
+            method:method,
+            url:url,
+        }).then(res=>{
+            return res.data.infos
+        })
+    )
+}
+
 function getHot(data){
     return axios({
         url : `http://www.mei.com/appapi/product/hot/v3?categoryId=${data.eventId}&productId=${data.productId}&platform_code=H5`
     }).then(res=>
       { console.log(res.data)
+         // window.localStorage.setItem('hot',JSON.stringify(res.data))
        return res.data.categoryList
     }
         )
 }
+
+function getHot2(method,url){
+    return (
+        axios({
+            method:method,
+            url:url,
+        }).then(res=>{
+            return  res.data.categoryList
+        })
+    )
+}
+
 
 // function getProduct(data){
 //     return axios({
@@ -37,4 +72,4 @@ function getHot(data){
 //     })
 // }
 
-export {getDetail,getColorSize,getHot}
+export {getDetail,getColorSize,getHot,getDetail2,getColorSize2,getHot2}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import ReactSwipe from 'react-swipe';
-import {getDetail,getColorSize,getHot} from './model'
+import {getDetail,getColorSize,getHot,getDetail2,getColorSize2,getHot2} from './model'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Mounting from '../../components/Mounting'
@@ -10,6 +10,7 @@ import CountDown from '../../components/CountDown'
 import {connect} from 'react-redux'
 import store from '../../store'
 import {Icon } from 'antd-mobile';
+import axios from 'axios'
 
 class Productdetail extends Component{
     constructor(props){
@@ -21,9 +22,9 @@ class Productdetail extends Component{
             colorsizepname : null,
             colorsizemarketId : null,
             colorsizeprice : null,
-            colorsizediscount :null,
+            newTagList :[],
             DetaildeliverDate : null,
-            ticketInfo : null,
+            ticketInfo : [],
             servicelist : [],
             sizelist:[],
             materialimg :null,
@@ -40,46 +41,90 @@ class Productdetail extends Component{
             hotlist:[],
             attributesNewList : [],
             show1 : false,
-            ticketvalue : null,
             ticketarr : [],
             show2 :false,
             servicearr : [],
             productReview : [],
-            ReviewCount : null
-
+            ReviewCount : null,
+            eventCode : null,
+            glsCode:null
         }
     }
 
     handleClick(){
         // console.log('aa')
+        document.body.style.position = 'fixed';
+        document.body.style.overflow = 'hidden';
+        console.log('Click')
         this.setState({
             show1 : !this.state.show1
         })
     }
 
+
+
+    handleClickRecover1(){
+        document.body.style.position = 'relative';
+        document.body.style.overflow = 'auto';
+          this.setState({
+            show1 : !this.state.show1,
+        })
+          console.log("none")
+    }
+
+    handleClickRecover2(){
+        document.body.style.position = 'relative';
+        document.body.style.overflow = 'auto';
+          this.setState({
+            show2 : !this.state.show2,
+        })
+          console.log("none")
+    }
+
     handleClick2(){
+         document.body.style.position = 'fixed';
+        document.body.style.overflow = 'hidden';
+        // console.log('Click')
         console.log('handleClick2')
         this.setState({
             show2 : !this.state.show2
         })
     }
 
-    handleClickGo(id){
+    handleClickGo(eventId,glsCode,productId){
+        // console.log(this.props)
+        // console.log(this.props.history)
+        // console.log(this.state.hotlist[index])
+        // console.log(this.state.hotlist[index].eventId)
+        // console.log(this.state.hotlist[index].glsCode)
+        // console.log(this.state.hotlist[index].url_key)
+        window.localStorage.setItem('eventId',eventId)
+        window.localStorage.setItem('glsCode',glsCode)
+        window.localStorage.setItem('productId',productId) 
         console.log(this.props)
-        console.log(this.props.history)
-        
+         axios({
+        url : `http://www.mei.com/appapi/product/hot/v3?categoryId=${window.localStorage.getItem('eventId')}&productId=${window.localStorage.getItem('productId')}&platform_code=H5`
+          }).then(res=>
+          {
+           console.log(res)
+           this.props.history.push(`/productdetail?eventCode=${window.localStorage.getItem('eventId')}&glsCode=${window.localStorage.getItem('glsCode')}`)
+
+            // console.log(res.data.categoryList)
+            // console.log(window.localStorage.getItem('hot'))    
+            })
     }
 
-    componentDidMount(){
+    componentWillReceiveProps(){
         document.documentElement.scrollTop=0;
-        console.log(JSON.parse(window.localStorage.getItem('detail')))
-        getDetail(JSON.parse(window.localStorage.getItem('detail'))).then(res=>{
-            // console.log(res)
-            // console.log(res.images)
+        getDetail2(
+            'get',
+            `http://www.mei.com/appapi/product/detail/v3?categoryId=${window.localStorage.getItem('eventId')}&productId=${window.localStorage.getItem('productId')}&platform_code=H5&timestamp=1546936741508&summary=a849f1a6061e0a2adfb7477e56eac71e`
+        ).then(res=>{
+            console.log(res);
             this.setState({
                 looplist : res.images,
                 DetaildeliverDate:res.deliver_date,
-                ticketInfo : res.ticketInfo[0].ruleInfo,
+                ticketInfo : res.ticketInfo,
                 servicelist : res.service_labels,
                 materialimg :res.description.material_quality_img,
                 attributesList : res.description.attributesList.pop(),
@@ -93,11 +138,71 @@ class Productdetail extends Component{
                 brandImg : res.brandImg,
                 brand_story : res.brand_story,
                 attributesNewList : res.description.attributesList,
-                ticketvalue : res.ticketInfo[0],
                 ticketarr: res.ticketInfo,
                 servicearr : res.service_labels,
                 productReview : res.productReviews.reviews,
-                ReviewCount :res.productReviews.totalCount
+                ReviewCount :res.productReviews.totalCount,
+                newTagList:res.newTagList,
+
+            })
+        })
+
+
+        getColorSize2('get',`http://www.mei.com/appapi/product/colorgroupsize/v3?categoryId=${window.localStorage.getItem('eventId')}&productId=${window.localStorage.getItem('productId')}&platform_code=H5&timestamp=1546936903691&summary=37dd1d07836517317d4b2f398174cacf`
+            ).then(res=>{
+                console.log(res)
+                this.setState({
+                    colorsize:res.colorGroup[0],
+                    colorsizepname :res.colorGroup[0].productName,
+                    colorsizemarketId: res.colorGroup[0].marketPrice,
+                    colorsizeprice : res.colorGroup[0].price,
+                    sizelist : res.size
+                })
+            })
+
+        getHot2('get',`http://www.mei.com/appapi/product/hot/v3?categoryId=${window.localStorage.getItem('eventId')}&productId=${window.localStorage.getItem('productId')}&platform_code=H5`
+            ).then(res=>{
+                console.log(res)
+                this.setState({
+                     hotlist:res
+                })
+            })
+
+
+
+    }
+
+
+    componentDidMount(){
+        document.documentElement.scrollTop=0;
+        console.log(JSON.parse(window.localStorage.getItem('detail')))
+          // console.log(JSON.parse(window.localStorage.getItem('hot')))
+        getDetail(JSON.parse(window.localStorage.getItem('detail'))).then(res=>{
+            // console.log(res)
+            // console.log(res.images)
+            this.setState({
+                looplist : res.images,
+                DetaildeliverDate:res.deliver_date,
+                ticketInfo : res.ticketInfo,
+                servicelist : res.service_labels,
+                materialimg :res.description.material_quality_img,
+                attributesList : res.description.attributesList.pop(),
+                sizeUnit : res.sizeMeasure.sizeUnit,
+                productsize1 : res.sizeMeasure.sizeTable.shift(),
+                sizeTable : res.sizeMeasure.sizeTable,
+                productimg : res.description.product_img1,
+                message : res.description.message,
+                maintenanceList : res.description.maintenanceList[0],
+                brandName : res.brandName,
+                brandImg : res.brandImg,
+                brand_story : res.brand_story,
+                attributesNewList : res.description.attributesList,
+                ticketarr: res.ticketInfo,
+                servicearr : res.service_labels,
+                productReview : res.productReviews.reviews,
+                ReviewCount :res.productReviews.totalCount,
+                newTagList:res.newTagList,
+
                 // ticketrangeDesc : res.ticketInfo[]
                 // ticketruleInfo : res.ticketInfo[]
                 // ticketstartDate :res.ticketInfo[]
@@ -107,7 +212,7 @@ class Productdetail extends Component{
             // console.log(this.state.attributesList)
             // console.log(this.state.attributesNewList)
             // console.log(this.state.brandName)
-            console.log(this.state.ticketvalue)
+            // console.log(this.state.ticketvalue)
             console.log(this.state.ticketarr)
             console.log(this.state.servicearr)
             console.log(this.state.productReview)
@@ -120,7 +225,6 @@ class Productdetail extends Component{
                 colorsizepname :res.colorGroup[0].productName,
                 colorsizemarketId: res.colorGroup[0].marketPrice,
                 colorsizeprice : res.colorGroup[0].price,
-                colorsizediscount :res.colorGroup[0].itemPriceDto.discount,
                 sizelist : res.size
 
             })  
@@ -131,7 +235,9 @@ class Productdetail extends Component{
             console.log(res)
             this.setState({
                 hotlist:res
+                // eventCode:res.categoryList
             })
+            console.log(this.state.hotlist)
         })
 
     }
@@ -168,23 +274,38 @@ class Productdetail extends Component{
                 <strong>￥{this.state.colorsizeprice}</strong>
 
                <div className={detailscss.detailtags}>
-                 <span> {this.state.colorsizediscount}折</span>
+                {
+                    this.state.newTagList.map((item,index)=>
+                        <span key={index}>{item.tag}</span>
+                        )
+                }
+              {/*   <span> {this.state.colorsizediscount}折</span>*/}
                 </div>
                 <div className={detailscss.delivery}>
                     <span><em>{this.state.DetaildeliverDate}</em></span>
                 </div>
                 {/* 闪购 */}
                <div className={detailscss.otherinfoitem}>
+
                     <div className={detailscss.countdown}>
                         <span className={detailscss.stitle}>闪购</span>
-                        <div className={detailscss.stext}> <CountDown myname={JSON.parse(window.localStorage.getItem('detail'))}/></div>
+                        {
+                            this.state.ticketInfo.length === 0?
+                                null : 
+                                <div className={detailscss.stext}> <CountDown myname={JSON.parse(window.localStorage.getItem('detail'))}/></div>
+                             
+                        }
+                    
                     </div>
                </div>
                {/* 领券 */}
                <div  className={detailscss.otherinfoitem + ' ' +detailscss.ticket} onClick={this.handleClick.bind(this)}  >
                     <div className={detailscss.coupons}>
                         <div className={detailscss.title}>领券</div>
-                        <div className={detailscss.summary}>{this.state.ticketInfo}</div>
+                        {this.state.ticketInfo.map((item,index)=>
+                             <div key={index} className={detailscss.summary}>{item.ruleInfo}</div>
+                            )}
+                       
                     </div>
                     {/* <div className={this.state.show?detailscss.ticketshow:null}> */}
                       {/* <button onClick={this.handleClick.bind(this)}>Press</button> */}
@@ -207,7 +328,9 @@ class Productdetail extends Component{
                    {/* </div> */}
                 </div>
                 {/* 尺码 */}
-                <div className={detailscss.otherinfoitem}>
+
+                {this.state.sizelist.length?
+                 <div className={detailscss.otherinfoitem}>
                     <div className={detailscss.sizelist}>
                     <div  className={detailscss.title}>尺码</div>
                      <div  className={detailscss.size}>
@@ -219,6 +342,9 @@ class Productdetail extends Component{
                      </div>
                     </div>
                 </div>
+                :null
+            }
+               
             </div>
             {/* 商品参数 */}
             <div  className={detailscss.blockdesc + ' ' +"proname"} >
@@ -250,7 +376,9 @@ class Productdetail extends Component{
                 </div>
             </div>
             {/* 尺码信息 */}
-            <div className={detailscss.blockdesc + " " + detailscss.clearfix + " " + detailscss.sizetable}>
+
+            {this.state.productsize1?
+           <div className={detailscss.blockdesc + " " + detailscss.clearfix + " " + detailscss.sizetable}>
               <h3 className={detailscss.blockheading}>尺码信息
                 <span className={detailscss.unit}>单位:{this.state.sizeUnit}</span>
                 <span className={detailscss.showsizepop} >尺码指南</span>
@@ -272,8 +400,8 @@ class Productdetail extends Component{
                     <div className={detailscss.sizetable}>
                         <div className={detailscss.container + " " +detailscss.clearfix}>
                             {
-                                this.state.sizeTable.map(item=>
-                                    <ul key={item.product_size} className={detailscss.list2}>
+                                this.state.sizeTable.map((item,index)=>
+                                    <ul key={index} className={detailscss.list2}>
                                         {
                                             Object.keys(item).map(key =>
                                                 <li key={key}>{item[key]}</li>
@@ -291,7 +419,10 @@ class Productdetail extends Component{
                     </div>
                 </div>
               </div>
-            </div>            
+            </div> 
+            :null
+            }
+            
             {/* 商品详情 */}
             <div className={detailscss.blockdesc+ ' ' +"prodetail"}>
               <h3 className={detailscss.blockheading}>商品详情</h3>
@@ -305,12 +436,17 @@ class Productdetail extends Component{
             </div>
             </div>
             {/* 洗护与保养 */}
-            <div className={detailscss.blockdesc}>
+            {
+                this.state.maintenanceList ?
+                         <div className={detailscss.blockdesc}>
               <h3 className={detailscss.blockheading}>洗护与保养</h3>
               <div className={detailscss.blockinfo}>
                  <p className={detailscss.p1}>{this.state.maintenanceList}</p>
               </div>
            </div>
+           :null
+            }
+   
             {/* 品牌 */}
             <div className={detailscss.blockdesc+ ' ' +"probrand"}>
                 <h3 className={detailscss.blockheading}>
@@ -346,7 +482,8 @@ class Productdetail extends Component{
                    </h3>
                    <div className={detailscss.blockinfo}>
                         {
-                            this.state.productReview.length===0?
+                            this.state.productReview.length?
+                            (this.state.productReview.length===0?
                             <div className={detailscss.nouser}>暂无用户评论</div>:
                             this.state.productReview.map((item,index)=>
                                     <div key={index} className={detailscss.review}>
@@ -360,11 +497,13 @@ class Productdetail extends Component{
                                              {item.dateTime}
                                         </div>
                                     </div>
-                            )
+                            ))
+                            : <div className={detailscss.nouser}>暂无用户评论</div>
                         }
                     </div>
             </div>
             {/* 大家都在看 */}
+            {this.state.hotlist.length ?         
             <div className={detailscss.hot}>
               <h3 className={detailscss.blockheading}>大家都在看</h3>
               <div className={detailscss.container1}>
@@ -373,8 +512,8 @@ class Productdetail extends Component{
                     <div className={detailscss.pic}>
 
 
-                    {this.state.hotlist.map(item=>
-                        <div key={item.productId} className={detailscss.hotp} onClick={this.handleClickGo.bind(this,item.productId)}>
+                    {this.state.hotlist.map((item)=>
+                        <div key={item.productId} className={detailscss.hotp} onClick={this.handleClickGo.bind(this,item.eventId,item.glsCode,item.productId)}>
                         
                                 <img src={item.imgUrl}/>
                                 <div className={detailscss.productinfo}>
@@ -394,13 +533,16 @@ class Productdetail extends Component{
                 </div>
               </div>
             </div>
+            :null
+        }
+
             </section>
             <div className={this.state.show1?detailscss.ticketshow:detailscss.disappear}>
                 <h4>领取优惠券</h4>
                 <div className={detailscss.pdetailpopupcontent}>
                       {
-                        this.state.ticketarr?
-                        this.state.ticketarr.map((item,index)=>
+                        this.state.ticketInfo?
+                        this.state.ticketInfo.map((item,index)=>
                             <div key={index}  className={detailscss.couponpopupitem}>
                                 <div className={detailscss.value}>
                                  <span className={detailscss.number}>
@@ -427,10 +569,11 @@ class Productdetail extends Component{
                       }
 
                 </div>
-                <a  onClick={this.handleClick.bind(this)}>确定</a>
+                <a  onClick={this.handleClick.bind(this)} onClick={this.handleClickRecover1.bind(this)}>确定</a>
             </div>
-            <div className={this.state.show2?detailscss.serviceshow+ ' ' + "overflow":detailscss.disappear}>
+            <div className={this.state.show2?detailscss.serviceshow+ ' ' + "overflow":detailscss.disappear}> 
                 <h4>魅力惠服务</h4>
+                <div className={detailscss.pppdetail}>
                 <div className={detailscss.pdetailpopupcontent}>
                    {
                        this.state.servicearr?
@@ -450,7 +593,8 @@ class Productdetail extends Component{
                        </dl>
                    </div> */}
                 </div>
-                <a  onClick={this.handleClick2.bind(this)}>确定</a>
+                </div>
+                <a  onClick={this.handleClick2.bind(this)} onClick={this.handleClickRecover2.bind(this)}>确定</a>
             </div>
             
             <Footer  myname={JSON.parse(window.localStorage.getItem('detail'))}/>
@@ -458,7 +602,5 @@ class Productdetail extends Component{
         
         )
     }
-
-
 }
 export default Productdetail
