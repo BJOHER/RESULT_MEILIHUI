@@ -19,8 +19,8 @@ class CountDown extends Component{
         getDetail(this.props.myname).then(res=>{
             console.log(res)
             this.setState({
-                endTime : res.ticketInfo[0].endDateLong,
-                begin : res.ticketInfo[0].startDateLong
+                endTime : res.ticketInfo.length=== 0 ?0 :  res.ticketInfo[0].endDateLong,
+                begin :  res.ticketInfo.length=== 0 ?0 : res.ticketInfo[0].startDateLong
             })
             // console.log(this.state.endTime)
             // console.log(this.state.begin)

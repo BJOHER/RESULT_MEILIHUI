@@ -21,9 +21,21 @@ class Footer extends Component{
     }    
 
     handleClick(){
+        document.body.style.position = 'fixed';
+        document.body.style.overflow = 'hidden';
+        console.log('Click')
         this.setState({
             show : !this.state.show
         })
+    }
+
+    handleClickRecover(){
+        document.body.style.position = 'relative';
+        document.body.style.overflow = 'auto';
+          this.setState({
+            show : !this.state.show
+        })
+          console.log("none")
     }
 
     handleClickGo(id){
@@ -92,7 +104,7 @@ class Footer extends Component{
               <span className="add-to-checkout x1x2" onClick={this.handleClick.bind(this)} >立即购买</span>
             </div>
 
-            <div className={this.state.show?footerscss.popup:null}>
+            <div className={this.state.show?footerscss.popup:null}  >
                 <div className={footerscss.info}>
                     <div className={footerscss.thumbnail}>
                         <img src={this.state.infoimg }/>
@@ -105,7 +117,7 @@ class Footer extends Component{
                             <span>已选择"{this.state.infocolor}"</span>
                         </div>
                     </div>
-                    <a onClick={this.handleClick.bind(this)} className={footerscss.cancel}>X</a>
+                    <a onClick={this.handleClick.bind(this)} className={footerscss.cancel}  onClick={this.handleClickRecover.bind(this)}>X</a>
                 </div>
 
                 <div className={footerscss.pdetailpopupcontent}>
