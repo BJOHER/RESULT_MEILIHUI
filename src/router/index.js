@@ -8,6 +8,7 @@ import Login from '../views/login/login';
 import Productlist from '../views/productlist/productlist';
 import Productdetail from '../views/productdetail/productdetail';
 import Shoppingcart from '../views/shoppingcart/shoppingcart';
+import Edit from '../views/edit/edit';
 import {Provider} from 'react-redux';
 import store from '../store';
 const router = (
@@ -21,6 +22,7 @@ const router = (
                 <Route path="/login" component={Login}/>
                 <Route path="/productlist" component={Productlist}/>
                 <Route path="/productdetail" component={Productdetail}/>
+                <Route path="/shoppingcart/edit" component={Edit} />
                 <Route path="/shoppingcart" component={Shoppingcart}/>
                 <Redirect from="*" to="/index"/>
             </Switch> 

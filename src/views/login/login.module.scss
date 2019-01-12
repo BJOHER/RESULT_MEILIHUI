@@ -1,0 +1,120 @@
+*{
+	padding:0;
+	margin:0;
+	font-family: -apple-system,BlinkMacSystemFont,"'PingFang SC'",Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+.all{
+	position: relative;
+	overflow: hidden;
+.ul{
+		width:100%;
+		// margin-left: 34px;
+		height:70px;
+		margin-top: 62px;
+		display: flex;
+		list-style: none;
+		.li{
+			flex:1;
+			width:180px;
+			height:70px;
+			text-align: center;
+		}
+		.lii{
+			flex:1;
+			width:180px;
+			height:70px;
+			text-align: center;
+		}
+		.liii{
+			// width: 70px;
+			flex:1;
+			height:70px;
+			float: left;
+			text-align: center;
+		}
+	}
+	*{
+		margin:0;
+		padding:0;
+	}
+	a{
+		text-decoration: none;
+	}	
+	
+	.h3{
+		font-weight:100;
+		margin-top: 54px;
+		margin-left: 54px;
+		font-size: 24px;
+	}
+	.span{
+		display: block;
+		font-size: 20px;
+		margin-top:10px;
+		float: right;
+		margin-right: 20px;
+		font-weight: 100;
+		font-size: 30px;
+	}
+	.p{
+		color: #ccc;
+		margin-left: 54px;
+		margin-top: 6px;
+	}
+	.qiehuan{
+		margin-top: 275px;
+		margin-left: 60px;
+	}
+
+	.a{
+		color:black;
+	}
+	.h2{
+		float:right;
+	}
+	.email{
+		width:300px;
+		height:60px;
+		position: fixed;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
+		margin:auto;
+		margin-top: 190px;
+		font-size: 14px;
+		line-height: 60px;
+		text-indent: 10px;
+		border: 1px solid #DDD
+	}
+	.mima{
+		margin-top: 260px;
+		width:300px;
+		height:60px;
+		position: absolute;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
+		margin:auto;
+		margin-top: 260px;
+		font-size: 14px;
+		line-height: 60px;
+		text-indent: 10px;
+		border: 1px solid #DDD
+	}
+	.yanse{
+		width:300px;
+		height:60px;
+		position: absolute;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
+		margin:auto;
+		margin-top: 330px;
+		font-size: 14px;
+		line-height: 60px;
+		// background-color:white;
+	}
+}	
