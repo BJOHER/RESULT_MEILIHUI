@@ -146,4 +146,15 @@ function brand(){
         })
     )
 }
-export {gethead,homebanner,getnav,getAd,getNewHot,getUp,getSiloBanner,cmsDetail,cmsDetailId,product,brand};
+
+function search(){
+    return(
+        axios({
+            method:'get',
+            url:'http://www.mei.com/appapi/search/searchFind/v3'
+        }).then(res=>{
+            return res.data.searchFindList;
+        })
+    )
+}
+export {gethead,homebanner,getnav,getAd,getNewHot,getUp,getSiloBanner,cmsDetail,cmsDetailId,product,brand,search};
