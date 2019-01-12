@@ -9,7 +9,7 @@ class Foot extends Component{
                     <a href="/index">首页</a>
                     <a href="/index">客户端</a>
                     <a href="/login">登陆</a>
-                    <a href="/login">注册</a>
+                    <a href="/register">注册</a>
                 </nav>
                 <p className={footcss.icp}>浙ICP备16004860号-1</p>
             </div>

@@ -135,11 +135,14 @@ class Footer extends Component{
                 </div>
 
                 <div className={footerscss.submitbtn2}>
-                    <span className="x1x2 add-to-cart btn-space" onClick={this.handleClickGo.bind(this,this.state.eventId)} ><NavLink to="/shoppingcart">加入购物车</NavLink></span>
+                    <span className="x1x2 add-to-cart btn-space" onClick={this.handleClickGo.bind(this,this.state.eventId)} onClick={this.handleshopcart.bind(this)}>加入购物车</span>
                     <span className="add-to-checkout x1x2"  >立即购买</span>
                 </div>
             </div>
         </div>
+    }
+    handleshopcart(){
+        
     }
 }
 
