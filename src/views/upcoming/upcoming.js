@@ -8,6 +8,11 @@ class Upcoming extends Component{
         super(props)
         this.state={
             list:[],
+            day:0,
+            hour:0,
+            minute:0,
+            second:0,
+            
         }
     }
     
@@ -18,7 +23,21 @@ class Upcoming extends Component{
                 list:res
             })
         })
+
     }
+
+    // function down(time) {
+    //     var timer = null;
+    //     timer = setInterval(()=>{
+    //         var day = 0,hour = 0,minute = 0, second = 0,
+    //         if(times > 0){
+    //             day = Math.floor(time/(1000*24*60*60));
+    //             minute = Math.floor(time/(1000*60*60)%24)
+    //         }
+    //     })
+    // }
+
+
     render(){
         return(
             <div>
@@ -27,7 +46,7 @@ class Upcoming extends Component{
                     <div className={upcomingcss.info}>
                         <h2>
                             距离开场还剩
-                            <span className={upcomingcss.time}>10</span>
+                            <span className={upcomingcss.time}>{this.state.day}:{this.state.hour}:{this.state.minute}:{this.state.hour}</span>
                             <span>小时</span>
                         </h2>
                         <div className={upcomingcss.tips}>
@@ -70,7 +89,7 @@ class Upcoming extends Component{
     }
 
     handleClick(siloEn,eventCode,URLKey){
-        this.props.history.push(`productlist/siloEn=${siloEn}&eventCode=${eventCode}&URLKey=${URLKey}`)
+        this.props.history.push(`/productlist?siloEn=${siloEn}&eventCode=${eventCode}&URLKey=${URLKey}`)
     }
 }
 export default Upcoming;
